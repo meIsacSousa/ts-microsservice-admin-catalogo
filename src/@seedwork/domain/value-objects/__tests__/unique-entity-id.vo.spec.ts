@@ -1,5 +1,5 @@
-import InvalidUuidError from "../errors/invalid-uuid.error";
-import UniqueEntityId from "./unique-entity-id.vo";
+import InvalidUuidError from "../../../errors/invalid-uuid.error";
+import UniqueEntityId from "../unique-entity-id.vo";
 import { validate } from "uuid";
 
 describe("UniqueEntityId Unit Tests", () => {
@@ -17,13 +17,13 @@ describe("UniqueEntityId Unit Tests", () => {
     const uniqueEntityId = new UniqueEntityId(id);
 
     expect(validateSpy).toBeCalledTimes(1);
-    expect(uniqueEntityId.id).toBe(id);
+    expect(uniqueEntityId.value).toBe(id);
   });
 
   it("Should create an unique entity id when nothing is passed", () => {
     const uniqueEntityId = new UniqueEntityId();
 
     expect(validateSpy).toBeCalledTimes(1);
-    expect(validate(uniqueEntityId.id)).toBeTruthy();
+    expect(validate(uniqueEntityId.value)).toBeTruthy();
   });
 });
