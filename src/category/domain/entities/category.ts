@@ -17,8 +17,8 @@ export default class Category extends Entity<CategoryProps> {
   }
 
   public update(name: string, description: string): void {
-    this.props.name = name ?? this.props.name;
-    this.props.description = description ?? this.props.description;
+    this.props.name = name;
+    this.props.description = description;
   }
 
   public activate(): void {
