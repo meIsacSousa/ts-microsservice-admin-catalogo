@@ -26,7 +26,7 @@ describe("Category Unit Tests", () => {
       uuid
     );
     expect(category).toBeInstanceOf(Category);
-    expect(category.id).toBe(uuid);
+    expect(category.uniqueEntityId).toBe(uuid);
     expect(category.name).toBe("Movie");
     expect(category.description).toBeNull();
     expect(category.is_active).toBeTruthy();
@@ -90,5 +90,31 @@ describe("Category Unit Tests", () => {
     expect(category.is_active).toBeTruthy();
     category["is_active"] = false;
     expect(category.is_active).toBeFalsy();
+  });
+
+  test("Should be able to deactivate and activate category", () => {
+    const category = new Category({
+      name: "Movie",
+    });
+    expect(category.is_active).toBeTruthy();
+    category.deactivate();
+    expect(category.is_active).toBeFalsy();
+    category.activate();
+    expect(category.is_active).toBeTruthy();
+  });
+
+  test("Should be able to update category", () => {
+    const category = new Category({
+      name: "Movie",
+    });
+    expect(category.name).toBe("Movie");
+    expect(category.description).toBeNull();
+
+    category.update(
+      "Movie 2",
+      "Movie category 2",
+    );
+    expect(category.name).toBe("Movie 2");
+    expect(category.description).toBe("Movie category 2");
   });
 });

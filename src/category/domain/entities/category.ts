@@ -1,4 +1,4 @@
-import Entity from "@seedwork/domain/entity/entity";
+import Entity from "../../../@seedwork/domain/entity/entity";
 import UniqueEntityId from "../../../@seedwork/domain/value-objects/unique-entity-id.vo";
 
 export type CategoryProps = {
@@ -14,6 +14,19 @@ export default class Category extends Entity<CategoryProps> {
     this.description = this.props.description;
     this.is_active = this.props.is_active;
     this.created_at = this.props.created_at;
+  }
+
+  public update(name: string, description: string): void {
+    this.props.name = name ?? this.props.name;
+    this.props.description = description ?? this.props.description;
+  }
+
+  public activate(): void {
+    this.is_active = true;
+  }
+
+  public deactivate(): void {
+    this.is_active = false;
   }
 
   get name(): string {
