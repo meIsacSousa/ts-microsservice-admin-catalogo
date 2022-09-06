@@ -1,7 +1,16 @@
 import UniqueEntityId from "../../../@seedwork/domain/value-objects/unique-entity-id.vo";
 import Category from "./category";
 
+// Dublê de testes
+// SpyOn - Espionar uma variável, classe ou método
+// Mock - Simular uma variável, classe ou método
+// stub - Substituir uma variável, classe ou método
+
 describe("Category Unit Tests", () => {
+  beforeEach(() => {
+    Category.validate = jest.fn();
+  });
+
   test("Should be able to create a new category", () => {
     const date = new Date();
     let category = new Category({
@@ -10,6 +19,7 @@ describe("Category Unit Tests", () => {
       is_active: false,
       created_at: date,
     });
+    expect(Category.validate).toBeCalledTimes(1);
     expect(category).toBeInstanceOf(Category);
     expect(category.id).toBeDefined();
     expect(category.id).not.toBeNull();
@@ -25,6 +35,7 @@ describe("Category Unit Tests", () => {
       },
       uuid
     );
+    expect(Category.validate).toBeCalledTimes(2);
     expect(category).toBeInstanceOf(Category);
     expect(category.uniqueEntityId).toBe(uuid);
     expect(category.name).toBe("Movie");
@@ -36,6 +47,7 @@ describe("Category Unit Tests", () => {
       name: "Movie",
       description: "Movie category",
     });
+    expect(Category.validate).toBeCalledTimes(3);
     expect(category).toBeInstanceOf(Category);
     expect(category.id).not.toBeNull();
     expect(category.name).toBe("Movie");
@@ -47,6 +59,7 @@ describe("Category Unit Tests", () => {
       name: "Movie",
       is_active: false,
     });
+    expect(Category.validate).toBeCalledTimes(4);
     expect(category).toBeInstanceOf(Category);
     expect(category.id).toBeDefined();
     expect(category.name).toBe("Movie");
@@ -58,6 +71,7 @@ describe("Category Unit Tests", () => {
       name: "Movie",
       created_at: date,
     });
+    expect(Category.validate).toBeCalledTimes(5);
     expect(category).toBeInstanceOf(Category);
     expect(category.name).toBe("Movie");
     expect(category.description).toBeNull();
@@ -107,6 +121,7 @@ describe("Category Unit Tests", () => {
     const category = new Category({
       name: "Movie",
     });
+    expect(Category.validate).toBeCalledTimes(1);
     expect(category.name).toBe("Movie");
     expect(category.description).toBeNull();
 
@@ -114,6 +129,7 @@ describe("Category Unit Tests", () => {
       "Movie 2",
       "Movie category 2",
     );
+    expect(Category.validate).toBeCalledTimes(2);
     expect(category.name).toBe("Movie 2");
     expect(category.description).toBe("Movie category 2");
   });
