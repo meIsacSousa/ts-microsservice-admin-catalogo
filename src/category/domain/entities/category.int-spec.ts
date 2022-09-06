@@ -71,7 +71,11 @@ describe("Category Integration Tests", () => {
             const asserts = [
                 { props: { name: "name" } },
                 { props: { name: "name", description: "description" } },
-                { props: { name: "name", description: null } },
+                {
+                    props: {
+                        name: "name", description: null
+                    }
+                },
             ]
 
             asserts.forEach(assert => {
