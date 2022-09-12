@@ -1,4 +1,4 @@
-import UniqueEntityId from "@seedwork/domain/value-objects/unique-entity-id.vo";
+import UniqueEntityId from "../domain/value-objects/unique-entity-id.vo";
 import Entity from "../domain/entity/entity";
 
 export interface RepositoryInterface<E extends Entity> {
@@ -8,3 +8,4 @@ export interface RepositoryInterface<E extends Entity> {
     update(entity: E): Promise<void>;
     delete(id: string | UniqueEntityId): Promise<void>;
 }
+
