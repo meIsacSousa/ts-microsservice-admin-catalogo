@@ -1,6 +1,7 @@
-import ValidatorRules from "../../../@seedwork/validators/validator-rules";
 import Entity from "../../../@seedwork/domain/entity/entity";
 import UniqueEntityId from "../../../@seedwork/domain/value-objects/unique-entity-id.vo";
+import { EntityValidationError } from "../../../@seedwork/errors/validation-error";
+import CategoryValidatorFactory from "../validators/category.validator";
 
 export type CategoryProps = {
   name: string;
@@ -24,11 +25,18 @@ export default class Category extends Entity<CategoryProps> {
     this.props.description = description;
   }
 
-  static validate(props: Omit<CategoryProps, "created_at">) {
-    ValidatorRules.values(props.name, "name").required().string();
-    ValidatorRules.values(props.description, "description").string();
-    ValidatorRules.values(props.is_active, "is_active").boolean();
+  static validate(props: CategoryProps) {
+    const validator = CategoryValidatorFactory.create();
+    if (!validator.validate(props)) {
+      throw new EntityValidationError(validator.errors);
+    }
   }
+
+  // static validate(props: Omit<CategoryProps, "created_at">) {
+  //   ValidatorRules.values(props.name, "name").required().string();
+  //   ValidatorRules.values(props.description, "description").string();
+  //   ValidatorRules.values(props.is_active, "is_active").boolean();
+  // }
 
   public activate(): void {
     this.is_active = true;

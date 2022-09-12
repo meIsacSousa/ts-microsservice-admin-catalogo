@@ -1,4 +1,5 @@
-import ValidatorRules from "./validator-rules";
+import ValidatorRules from "../validator-rules";
+
 
 // helpers
 type ExpectedAssert = {
