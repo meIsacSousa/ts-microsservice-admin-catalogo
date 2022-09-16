@@ -1,4 +1,4 @@
-import { SearchParams } from "./repository-contracts";
+import { SearchParams, SearchResult } from "./repository-contracts";
 
 describe("SearchParams Unit Tests", () => {
   test("Page Prop", () => {
@@ -108,5 +108,69 @@ describe("SearchParams Unit Tests", () => {
       const searchParams = new SearchParams({ filter: assert.filter as any });
       expect(searchParams.filter).toBe(assert.expected);
     });
+  });
+});
+
+describe("SearchResult Unit Tests", () => {
+  test("Constructor props", () => {
+    const asserts = [
+      {
+        props: {
+          items: ["item1", "item2"],
+          total: 4,
+          current_page: 1,
+          per_page: 2,
+          sort: null,
+          sort_dir: null,
+          filter: null,
+        },
+        last_page: 2,
+      },
+      {
+        props: {
+          items: ["item1", "item2"],
+          total: 4,
+          current_page: 1,
+          per_page: 2,
+          sort: "name",
+          sort_dir: "asc",
+          filter: "test",
+        },
+        last_page: 2,
+      },
+      {
+        props: {
+          items: ["item1", "item2"],
+          total: 27,
+          current_page: 1,
+          per_page: 5,
+          sort: "name",
+          sort_dir: "asc",
+          filter: "test",
+        },
+        last_page: 6,
+      },
+    ];
+
+    asserts.forEach((assert) => {
+      const searchResult = new SearchResult(assert.props as any);
+      expect(searchResult.toJSON()).toStrictEqual({
+        ...assert.props,
+        last_page: assert.last_page,
+      });
+    });
+  });
+
+  it("Should set last_page 1 when per_page field is greater than total field", () => {
+    const searchResult = new SearchResult({
+      items: [],
+      total: 2,
+      current_page: 1,
+      per_page: 5,
+      sort: null,
+      sort_dir: null,
+      filter: null,
+    });
+    expect(searchResult.last_page).toBe(1);
   });
 });
