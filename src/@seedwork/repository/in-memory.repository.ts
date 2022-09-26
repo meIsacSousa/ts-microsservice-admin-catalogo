@@ -3,6 +3,9 @@ import Entity from "../domain/entity/entity";
 import {
   RepositoryInterface,
   SearchableRepositoryInterface,
+  SearchParams,
+  SearchResult,
+  SortDirection,
 } from "./repository-contracts";
 import NotFoundError from "../errors/not-found.error";
 
@@ -49,8 +52,65 @@ export abstract class InMemorySearchableRepository<E extends Entity>
   extends InMemoryRepository<E>
   implements SearchableRepositoryInterface<E, any, any>
 {
-  public search(props: any): Promise<any> {
-    throw new Error("Method not implemented.");
+  sortableFields: string[] = [];
+  public async search(props: SearchParams): Promise<SearchResult<E>> {
+    const itemsFiltered = await this.applyFilter(this.entities, props.filter);
+    const itemsSorted = await this.applySort(
+      itemsFiltered,
+      props.sort,
+      props.sort_dir
+    );
+    const itemsPaginated = await this.applyPagination(
+      itemsSorted,
+      props.page,
+      props.per_page
+    );
+
+    return new SearchResult({
+      items: itemsPaginated,
+      total: itemsFiltered.length,
+      current_page: props.page,
+      per_page: props.per_page,
+      sort: props.sort,
+      sort_dir: props.sort_dir,
+      filter: props.filter,
+    });
+  }
+
+  protected abstract applyFilter(
+    items: E[],
+    filter: string | null
+  ): Promise<E[]>;
+
+  protected async applySort(
+    items: E[],
+    sort: string | null,
+    sort_dir: SortDirection | null
+  ): Promise<E[]> {
+    if (!sort || !this.sortableFields.includes(sort)) {
+      return items;
+    }
+    return [...items].sort((a, b) => {
+      if (a.props[sort] < b.props[sort]) {
+        return sort_dir === "ASC" ? -1 : 1;
+      }
+
+      if (a.props[sort] > b.props[sort]) {
+        return sort_dir === "ASC" ? 1 : -1;
+      }
+
+      return 0;
+    });
+  }
+
+  protected async applyPagination(
+    items: E[],
+    page: SearchParams["page"],
+    per_page: SearchParams["per_page"]
+  ): Promise<E[]> {
+    const start = (page - 1) * per_page;
+    const end = start + per_page;
+    return items.slice(start, end);
   }
 }
 
