@@ -1,6 +1,6 @@
 import CategoryRepository from "../../domain/repository/category.repository";
 import Category from "../../domain/entities/category";
-import { CategoryOutput, CategoryOutputMapper } from "./dto/category-output";
+import { CategoryOutput, CategoryOutputMapper } from "../dto/category-output";
 import UseCase from "../../../@seedwork/application/use-case";
 
 // verbo - substantivo - sufixo

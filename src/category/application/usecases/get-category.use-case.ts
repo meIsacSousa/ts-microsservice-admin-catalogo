@@ -1,6 +1,6 @@
 import UseCase from "../../../@seedwork/application/use-case";
 import CategoryRepository from "../../domain/repository/category.repository";
-import { CategoryOutput, CategoryOutputMapper } from "./dto/category-output";
+import { CategoryOutput, CategoryOutputMapper } from "../dto/category-output";
 
 // verbo - substantivo - sufixo
 export default class GetCategoryUseCase implements UseCase<Input, Output> {
