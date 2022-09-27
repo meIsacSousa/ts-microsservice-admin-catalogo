@@ -1,5 +1,5 @@
-import UniqueEntityId from "../../domain/value-objects/unique-entity-id.vo";
-import Entity from "../../domain/entity/entity";
+import UniqueEntityId from "../../value-objects/unique-entity-id.vo";
+import Entity from "../../entity/entity";
 import { InMemoryRepository } from "../in-memory.repository";
 
 class StubEntityProps {

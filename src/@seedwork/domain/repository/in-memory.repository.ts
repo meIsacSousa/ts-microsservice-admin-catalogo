@@ -1,5 +1,5 @@
-import UniqueEntityId from "../domain/value-objects/unique-entity-id.vo";
-import Entity from "../domain/entity/entity";
+import UniqueEntityId from "../value-objects/unique-entity-id.vo";
+import Entity from "../entity/entity";
 import {
   RepositoryInterface,
   SearchableRepositoryInterface,
@@ -7,7 +7,7 @@ import {
   SearchResult,
   SortDirection,
 } from "./repository-contracts";
-import NotFoundError from "../errors/not-found.error";
+import NotFoundError from "../../errors/not-found.error";
 
 export abstract class InMemoryRepository<E extends Entity>
   implements RepositoryInterface<E>
