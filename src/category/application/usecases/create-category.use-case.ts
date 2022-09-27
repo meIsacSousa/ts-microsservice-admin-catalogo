@@ -1,20 +1,6 @@
 import CategoryRepository from "../../domain/repository/category.repository";
 import Category from "../../domain/entities/category";
-
-// DTO - Data Transfer Object
-export type Input = {
-  name: string;
-  description?: string;
-  is_active?: boolean;
-};
-
-export type Output = {
-  id: string;
-  name: string;
-  description: string | null;
-  is_active: boolean;
-  created_at: Date;
-};
+import { CategoryOutput } from "./dto/category-output.dto";
 
 // verbo - substantivo - sufixo
 export default class CreateCategoryUseCase {
@@ -32,3 +18,12 @@ export default class CreateCategoryUseCase {
     };
   }
 }
+
+// DTO - Data Transfer Object
+export type Input = {
+  name: string;
+  description?: string;
+  is_active?: boolean;
+};
+
+export type Output = CategoryOutput;
