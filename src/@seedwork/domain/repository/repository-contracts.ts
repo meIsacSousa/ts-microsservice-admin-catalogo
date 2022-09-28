@@ -1,5 +1,5 @@
-import UniqueEntityId from "../value-objects/unique-entity-id.vo";
-import Entity from "../entity/entity";
+import { UniqueEntityId } from "../value-objects";
+import { Entity } from "../entity";
 
 export interface RepositoryInterface<E extends Entity> {
   findAll(): Promise<E[]>;

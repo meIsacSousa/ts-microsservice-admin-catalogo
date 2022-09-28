@@ -1,10 +1,9 @@
-import CategoryRepository from "../../domain/repository/category.repository";
-import Category from "../../domain/entities/category";
-import { CategoryOutput, CategoryOutputMapper } from "../dto/category-output";
-import UseCase from "@seedwork/application/use-case";
+import { CategoryRepository, Category } from "../../domain";
+import { CategoryOutput, CategoryOutputMapper } from "../dto";
+import { UseCase } from "#seedwork/application";
 
 // verbo - substantivo - sufixo
-export default class CreateCategoryUseCase implements UseCase<Input, Output> {
+export class CreateCategoryUseCase implements UseCase<Input, Output> {
   constructor(private categoryRepo: CategoryRepository.Repository) {}
 
   async execute(input: Input): Promise<Output> {

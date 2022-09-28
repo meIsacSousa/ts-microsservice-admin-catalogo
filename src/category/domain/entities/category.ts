@@ -1,7 +1,9 @@
-import Entity from "@seedwork/domain/entity/entity";
-import UniqueEntityId from "@seedwork/domain/value-objects/unique-entity-id.vo";
-import { EntityValidationError } from "@seedwork/errors/validation-error";
-import CategoryValidatorFactory from "../validators/category.validator";
+import {
+  Entity,
+  UniqueEntityId,
+  EntityValidationError,
+} from "#seedwork/domain";
+import { CategoryValidatorFactory } from "../validators/category.validator";
 
 export type CategoryProps = {
   name: string;
@@ -10,7 +12,7 @@ export type CategoryProps = {
   created_at?: Date;
 };
 
-export default class Category extends Entity<CategoryProps> {
+export class Category extends Entity<CategoryProps> {
   constructor(readonly props: CategoryProps, id?: UniqueEntityId) {
     Category.validate(props);
     super(props, id);

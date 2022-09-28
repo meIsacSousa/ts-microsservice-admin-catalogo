@@ -6,7 +6,7 @@ import {
   IsString,
   MaxLength,
 } from "class-validator";
-import ValidatorFields from "@seedwork/domain/validators/class-validator-fields";
+import { ValidatorFields } from "#seedwork/domain";
 import { CategoryProps } from "../entities/category";
 
 export class CategoryRules {
@@ -38,7 +38,7 @@ export class CategoryValidator extends ValidatorFields<CategoryRules> {
   }
 }
 
-export default class CategoryValidatorFactory {
+export class CategoryValidatorFactory {
   static create(): CategoryValidator {
     return new CategoryValidator();
   }

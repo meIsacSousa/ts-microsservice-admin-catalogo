@@ -1,5 +1,5 @@
-import UseCase from "@seedwork/application/use-case";
-import CategoryRepository from "../../domain/repository/category.repository";
+import { UseCase } from "#seedwork/application";
+import { CategoryRepository } from "../../domain";
 
 export class DeleteCategoryUseCase implements UseCase<Input, Output> {
   constructor(private categoryRepository: CategoryRepository.Repository) {}

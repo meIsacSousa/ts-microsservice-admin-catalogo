@@ -1,6 +1,5 @@
-import { SearchParams } from "@seedwork/domain/repository/repository-contracts";
-import Category from "../../domain/entities/category";
-import CategoryInMemoryRepository from "./category-in-memory.repository";
+import { Category } from "../../domain";
+import { CategoryInMemoryRepository } from "./category-in-memory.repository";
 
 describe("Category In Memory Repository Tests", () => {
   let repository = new CategoryInMemoryRepository();

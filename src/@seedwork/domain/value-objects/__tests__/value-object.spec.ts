@@ -1,6 +1,6 @@
-import ValueObject from "../value-object";
+import { ValueObject } from "../value-object";
 
-class StubValueObject extends ValueObject { }
+class StubValueObject extends ValueObject {}
 
 // mock - instância fake de uma classe
 // spy  - função que observa se uma função foi chamada
@@ -48,10 +48,12 @@ describe("ValueObject Unit Tests", () => {
       },
     });
 
-    expect(() => vo.value.prop1 = "new value")
-      .toThrow("Cannot assign to read only property 'prop1' of object '#<Object>'");
-    expect(() => vo.value.deep.prop2 = "new value")
-      .toThrow("Cannot assign to read only property 'prop2' of object '#<Object>'");
+    expect(() => (vo.value.prop1 = "new value")).toThrow(
+      "Cannot assign to read only property 'prop1' of object '#<Object>'"
+    );
+    expect(() => (vo.value.deep.prop2 = "new value")).toThrow(
+      "Cannot assign to read only property 'prop2' of object '#<Object>'"
+    );
     expect(vo.value.deep.prop3).toBeInstanceOf(Date);
   });
 });

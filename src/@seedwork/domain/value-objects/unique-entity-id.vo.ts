@@ -1,8 +1,8 @@
-import InvalidUuidError from "../../errors/invalid-uuid.error";
+import { InvalidUuidError } from "../errors";
 import { v4 as randomUUID, validate } from "uuid";
-import ValueObject from "./value-object";
+import { ValueObject } from "./value-object";
 
-export default class UniqueEntityId extends ValueObject<string> {
+export class UniqueEntityId extends ValueObject<string> {
   constructor(id?: string) {
     super(id ?? randomUUID());
     this.validate();

@@ -1,8 +1,8 @@
-import UseCase from "@seedwork/application/use-case";
-import CategoryRepository from "../../domain/repository/category.repository";
-import { CategoryOutputMapper } from "../dto/category-output";
+import { UseCase } from "#seedwork/application";
+import { CategoryRepository } from "../../domain";
+import { CategoryOutputMapper } from "../dto";
 
-export default class UpdateCategoryUseCase implements UseCase<Input, Output> {
+export class UpdateCategoryUseCase implements UseCase<Input, Output> {
   constructor(private categoryRepo: CategoryRepository.Repository) {}
 
   async execute(input: Input): Promise<Output> {
