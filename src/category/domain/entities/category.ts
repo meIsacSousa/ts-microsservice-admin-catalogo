@@ -21,8 +21,8 @@ export default class Category extends Entity<CategoryProps> {
 
   public update(name: string, description: string): void {
     Category.validate({ name, description });
-    this.props.name = name;
-    this.props.description = description;
+    this.name = name;
+    this.description = description;
   }
 
   static validate(props: CategoryProps) {
@@ -48,6 +48,10 @@ export default class Category extends Entity<CategoryProps> {
 
   get name(): string {
     return this.props.name;
+  }
+
+  private set name(value: string) {
+    this.props.name = value;
   }
 
   get description(): string {
