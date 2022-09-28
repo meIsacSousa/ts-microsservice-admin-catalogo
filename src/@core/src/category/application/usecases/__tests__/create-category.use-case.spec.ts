@@ -2,12 +2,12 @@ import { CategoryInMemoryRepository } from "../../../infra";
 import { CreateCategoryUseCase } from "../create-category.use-case";
 
 describe("CreateCategoryUseCase Unit Tests", () => {
-  let useCase: CreateCategoryUseCase;
+  let useCase: CreateCategoryUseCase.UseCase;
   let categoryRepository: CategoryInMemoryRepository;
 
   beforeEach(() => {
     categoryRepository = new CategoryInMemoryRepository();
-    useCase = new CreateCategoryUseCase(categoryRepository);
+    useCase = new CreateCategoryUseCase.UseCase(categoryRepository);
   });
 
   it("should create a category", async () => {

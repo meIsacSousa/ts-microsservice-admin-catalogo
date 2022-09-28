@@ -3,12 +3,12 @@ import { CategoryInMemoryRepository } from "../../../infra";
 import { DeleteCategoryUseCase } from "../delete-category.use-case";
 
 describe("CreateCategoryUseCase Unit Tests", () => {
-  let useCase: DeleteCategoryUseCase;
+  let useCase: DeleteCategoryUseCase.UseCase;
   let categoryRepository: CategoryInMemoryRepository;
 
   beforeEach(() => {
     categoryRepository = new CategoryInMemoryRepository();
-    useCase = new DeleteCategoryUseCase(categoryRepository);
+    useCase = new DeleteCategoryUseCase.UseCase(categoryRepository);
   });
 
   it("should throw an error if category not found", async () => {

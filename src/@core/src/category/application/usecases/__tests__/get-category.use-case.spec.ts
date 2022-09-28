@@ -3,12 +3,12 @@ import { CategoryInMemoryRepository } from "../../../infra";
 import { GetCategoryUseCase } from "../get-category.use-case";
 
 describe("GetCategoryUseCase Unit Tests", () => {
-  let useCase: GetCategoryUseCase;
+  let useCase: GetCategoryUseCase.UseCase;
   let categoryRepository: CategoryInMemoryRepository;
 
   beforeEach(() => {
     categoryRepository = new CategoryInMemoryRepository();
-    useCase = new GetCategoryUseCase(categoryRepository);
+    useCase = new GetCategoryUseCase.UseCase(categoryRepository);
   });
 
   it("should throw an error if category not found", async () => {
