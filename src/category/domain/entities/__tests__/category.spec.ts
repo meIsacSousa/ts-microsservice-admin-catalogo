@@ -1,4 +1,4 @@
-import UniqueEntityId from "../../../../@seedwork/domain/value-objects/unique-entity-id.vo";
+import UniqueEntityId from "@seedwork/domain/value-objects/unique-entity-id.vo";
 import Category from "../category";
 
 // Dublê de testes
@@ -125,10 +125,7 @@ describe("Category Unit Tests", () => {
     expect(category.name).toBe("Movie");
     expect(category.description).toBeNull();
 
-    category.update(
-      "Movie 2",
-      "Movie category 2",
-    );
+    category.update("Movie 2", "Movie category 2");
     expect(Category.validate).toBeCalledTimes(2);
     expect(category.name).toBe("Movie 2");
     expect(category.description).toBe("Movie category 2");

@@ -1,4 +1,4 @@
-import { SearchParams } from "../../../@seedwork/domain/repository/repository-contracts";
+import { SearchParams } from "@seedwork/domain/repository/repository-contracts";
 import Category from "../../domain/entities/category";
 import CategoryInMemoryRepository from "./category-in-memory.repository";
 
