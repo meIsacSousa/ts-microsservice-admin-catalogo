@@ -5,7 +5,7 @@
   "main": "index.js",
   "imports": {
     "#seedwork/*": "./dist/@seedwork/*.js",
-    "#category/*": "./dist/@category/*.js"
+    "#category/*": "./dist/category/*.js"
   },
   "exports": {
     "./@seedwork/application": "./dist/@seedwork/application/index.js",
