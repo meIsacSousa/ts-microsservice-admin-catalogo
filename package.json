@@ -1,4 +1,7 @@
 {
+  "dependencies": {
+    "@nestjs/mapped-types": "*"
+  },
   "name": "microvideos-javascript",
   "version": "0.0.1",
   "description": "",
@@ -10,6 +13,7 @@
   "scripts": {
     "prestart:dev": "npm run build -w @fc/micro-videos",
     "start:dev": "npm run build:w -w @fc/micro-videos & npm run start:dev -w nestjs",
+    "test:all": "npm run test -w @fc/micro-videos && npm run test -w nestjs",
     "test": "jest"
   },
   "repository": {

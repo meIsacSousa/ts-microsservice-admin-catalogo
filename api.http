@@ -1,0 +1,24 @@
+GET http://localhost:3000/categories
+###
+GET http://localhost:3000/categories/102fe7ab-42fd-407a-90fa-c39bb6f99726
+###
+DELETE http://localhost:3000/categories/102fe7ab-42fd-407a-90fa-c39bb6f99726
+###
+POST http://localhost:3000/categories
+Content-Type: application/json
+
+{
+  "name": "Category 5",
+  "description": "Category 5 description",
+  "is_active": false
+}
+###
+PUT http://localhost:3000/categories/6bd26380-0115-4d53-82e9-8de6d616e3be
+Content-Type: application/json
+
+{
+  "name": "Category 2",
+  "description": "Category 2 description",
+  "is_active": false
+}
+
