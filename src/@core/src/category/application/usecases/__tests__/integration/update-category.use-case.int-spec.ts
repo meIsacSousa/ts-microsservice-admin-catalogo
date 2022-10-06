@@ -1,13 +1,15 @@
-import { Category } from "../../../domain";
-import { CategoryInMemoryRepository } from "../../../infra";
-import { UpdateCategoryUseCase } from "../update-category.use-case";
+import { UpdateCategoryUseCase } from "../../update-category.use-case";
+import { setupSequelize } from "#seedwork/infra";
+import { CategorySequelize } from "#category/infra";
+const { CategoryModel, CategorySequelizeRepository } = CategorySequelize;
 
-describe("CreateCategoryUseCase Unit Tests", () => {
+describe("CreateCategoryUseCase Integration Tests", () => {
   let useCase: UpdateCategoryUseCase.UseCase;
-  let categoryRepository: CategoryInMemoryRepository;
+  let categoryRepository: CategorySequelize.CategorySequelizeRepository;
 
+  setupSequelize({ models: [CategoryModel] });
   beforeEach(() => {
-    categoryRepository = new CategoryInMemoryRepository();
+    categoryRepository = new CategorySequelizeRepository(CategoryModel);
     useCase = new UpdateCategoryUseCase.UseCase(categoryRepository);
   });
 
@@ -18,16 +20,13 @@ describe("CreateCategoryUseCase Unit Tests", () => {
     };
 
     await expect(useCase.execute(input)).rejects.toThrowError(
-      "Entity with id fake_id not found"
+      "Entity Not Found using ID: fake_id"
     );
   });
 
   it("should update a category", async () => {
-    const spyUpdate = jest.spyOn(categoryRepository, "update");
-    const entity = new Category({ name: "Movie" });
-    categoryRepository["entities"] = [entity];
+    const entity = await CategoryModel.factory().create();
     let output = await useCase.execute({ id: entity.id, name: "test" });
-    expect(spyUpdate).toHaveBeenCalledTimes(1);
     expect(output).toStrictEqual({
       id: entity.id,
       name: "test",

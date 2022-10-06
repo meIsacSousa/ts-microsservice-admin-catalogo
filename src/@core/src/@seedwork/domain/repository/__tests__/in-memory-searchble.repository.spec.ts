@@ -208,7 +208,7 @@ describe("InMemorySearchableRepository Unit Tests", () => {
       );
     });
 
-    it("should apply paginate and sort", async () => {
+    describe("should apply paginate and sort", () => {
       const items = [
         new StubEntity({ name: "b", price: 20 }),
         new StubEntity({ name: "a", price: 10 }),
@@ -216,7 +216,6 @@ describe("InMemorySearchableRepository Unit Tests", () => {
         new StubEntity({ name: "e", price: 40 }),
         new StubEntity({ name: "c", price: 40 }),
       ];
-      repository["entities"] = items;
       const arrange = [
         {
           params: new SearchParams({
@@ -268,11 +267,13 @@ describe("InMemorySearchableRepository Unit Tests", () => {
           }),
         },
       ];
-
-      for (const item of arrange) {
+      beforeEach(() => {
+        repository["entities"] = items;
+      });
+      test.each(arrange)("when value is %j", async (item) => {
         let result = await repository.search(new SearchParams(item.params));
         expect(result).toStrictEqual(item.result);
-      }
+      });
     });
 
     it("should apply paginate, filter and sort", async () => {

@@ -1,4 +1,4 @@
-import { Category } from "../../domain";
+import { Category } from "../../../../domain";
 import { CategoryInMemoryRepository } from "./category-in-memory.repository";
 
 describe("Category In Memory Repository Tests", () => {
